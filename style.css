@@ -8,19 +8,53 @@ body {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 100%;
+    width: 80%; /* Harita genişliği ayarı */
 }
 
-#slider {
+#legend {
     position: absolute;
-    bottom: 50px;
-    left: 50px;
-    width: 300px;
-    background: rgba(255, 255, 255, 0.8);
+    top: 20px;
+    right: 20px;
+    background: white;
     padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
     font-family: sans-serif;
+    width: 15%; /* Legend genişliği ayarı */
 }
 
-#dateLabel {
-    margin-left: 10px;
+#legend h3 {
+    margin-top: 0;
+}
+
+#legend ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#legend li {
+    margin-bottom: 8px;
+}
+
+#legend a {
+    text-decoration: none;
+    color: #0074D9;
+    cursor: pointer;
+}
+
+#legend a:hover {
+    text-decoration: underline;
+}
+
+#resetButton {
+    background-color: #FF4136;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#resetButton:hover {
+    background-color: #FF6347;
 }

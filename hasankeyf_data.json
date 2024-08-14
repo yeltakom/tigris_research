@@ -45,6 +45,81 @@
         "image": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Ilisu_dam_construction.jpg",
         "video": "https://www.youtube.com/embed/abcxyz"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.34, 37.71] // Biraz kaydırıldı
+      },
+      "properties": {
+        "title": "Dicle Nehri’nin Yönü Değiştirildi",
+        "date": 2012,
+        "details": "Nehir yatağının yönü değiştirilerek baraj inşaatı için hazırlık yapıldı.",
+        "category": "Ekosistem, İnşaat",
+        "image": null,
+        "video": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.345, 37.715] // Biraz kaydırıldı
+      },
+      "properties": {
+        "title": "Hasankeyf'te İlk Baraj Göleti Oluşturuldu",
+        "date": 2013,
+        "details": "Barajın ilk göletleri oluşturulmaya başlandı; bu durum, ekosisteme ve arkeolojik alanlara zarar verdi.",
+        "category": "Ekosistem, Arkeoloji",
+        "image": null,
+        "video": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.33, 37.713] // Biraz kaydırıldı
+      },
+      "properties": {
+        "title": "Zeynel Bey Türbesi Taşındı",
+        "date": 2015,
+        "details": "Zeynel Bey Türbesi’nin taşınması, tarihi bütünlüğe zarar verdi. Diğer anıtlar da taşınacak olup, kültürel miras zarar görecek.",
+        "category": "Kültür, Tarih",
+        "image": null,
+        "video": "https://www.youtube.com/embed/defghi"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.32, 37.712] // Biraz kaydırıldı
+      },
+      "properties": {
+        "title": "Hasankeyf'in Tamamen Sular Altında Kalması",
+        "date": 2019,
+        "details": "12.000 yıllık tarihe sahip olan Hasankeyf, Ilısu Barajı'nın dolmasıyla tamamen sular altında kaldı.",
+        "category": "Tarih, Arkeoloji",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Hasankeyf_under_water.jpg",
+        "video": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.35, 37.719] // Biraz kaydırıldı
+      },
+      "properties": {
+        "title": "Hasankeyf ve Çevresindeki Kültürel Mirasın Geri Dönülmez Kaybı",
+        "date": 2024,
+        "details": "Uzmanlar, Hasankeyf ve çevresindeki kültürel mirasın geri dönülmez bir şekilde kaybedildiğini ve dünya kültürel mirasına büyük bir darbe vurulduğunu belirtti.",
+        "category": "Kültürel Miras, Tarih",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Hasankeyf_ruins.jpg",
+        "video": null
+      }
     }
   ]
 }
