@@ -5,14 +5,13 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [40.6469, 37.9188] 
+        "coordinates": [40.6469, 37.9188]
       },
       "properties": {
         "title": "Sümerler Tigris Nehri Boyunca Tarım Yaptı",
         "date": -3000,
         "details": "Sümerler, Dicle Nehri boyunca sulama sistemleri kurarak tarım faaliyetlerini geliştirdi.",
         "category": "Tarih, Ekonomi",
-        "source": "Genel Tarih Kaynakları",
         "image": "https://upload.wikimedia.org/wikipedia/commons/8/84/Tigris_River_at_Hasankeyf_2016.jpg",
         "video": null
       }
@@ -28,11 +27,24 @@
         "date": -12000,
         "details": "24 farklı kültürün izlerini taşıyan, yerleşik hayata geçişin simgesi olan bir bölgedir.",
         "category": "Tarih, Kültür",
-        "source": "European Rivers Network",
         "image": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Hasankeyf.jpg",
         "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.03, 37.65]
+      },
+      "properties": {
+        "title": "Ilısu Barajı İnşaatı Resmi Olarak Başladı",
+        "date": 1997,
+        "details": "Baraj inşaatı, yerel halkın protestolarına ve zorunlu göçlere neden oldu; 199 yerleşim yerinden 55 bin kişi göç etti.",
+        "category": "Ekosistem, Sosyal Etki",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Ilisu_dam_construction.jpg",
+        "video": "https://www.youtube.com/embed/abcxyz"
+      }
     }
-    // Diğer verileri buraya ekleyin...
   ]
 }
