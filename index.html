@@ -25,12 +25,12 @@
     <div id="map"></div>
 
     <script>
-        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';  // Mapbox access token burada olacak
+        mapboxgl.accessToken = 'pk.eyJ1IjoieWVsdGFrb20iLCJhIjoidG93ZmpycyJ9.OmdsZ72J67CAQR9tFm8_Nw';  // Mapbox access token burada olacak
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [41.3377, 37.7083], // Hasankeyf'in koordinatları
-            zoom: 8
+            zoom: 10
         });
 
         fetch('hasankeyf_data.json')
