@@ -1,3 +1,8 @@
+Aşağıda, belirttiğiniz 30 satırlık veri setini JSON formatına çevirdim ve bu verileri Mapbox ile kullanabileceğiniz bir formatta düzenledim. Bu JSON dosyasını doğrudan Mapbox haritanızda kullanabilirsiniz.
+
+### JSON Veri Seti (hasankeyf_data.json)
+
+```json
 {
   "type": "FeatureCollection",
   "features": [
@@ -12,8 +17,7 @@
         "date": -3000,
         "details": "Sümerler, Dicle Nehri boyunca sulama sistemleri kurarak tarım faaliyetlerini geliştirdi.",
         "category": "Tarih, Ekonomi",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/8/84/Tigris_River_at_Hasankeyf_2016.jpg",
-        "video": null
+        "source": "Genel Tarih Kaynakları"
       }
     },
     {
@@ -27,99 +31,186 @@
         "date": -12000,
         "details": "24 farklı kültürün izlerini taşıyan, yerleşik hayata geçişin simgesi olan bir bölgedir.",
         "category": "Tarih, Kültür",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Hasankeyf.jpg",
-        "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        "source": "European Rivers Network"
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.03, 37.65]
+        "coordinates": [41.05, 37.61]
+      },
+      "properties": {
+        "title": "Güneydoğu Anadolu Projesi (GAP) Resmi Başlatıldı",
+        "date": 1980,
+        "details": "22 baraj ve sulama projelerini içeren GAP, bölgenin ekonomik kalkınmasını hedefledi.",
+        "category": "Ekonomi, Ekosistem",
+        "source": "UNESCO World Heritage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.04, 37.65]
+      },
+      "properties": {
+        "title": "GAP Kapsamında İlk Barajların İnşaatına Başlandı",
+        "date": 1982,
+        "details": "GAP kapsamında Fırat ve Dicle nehirleri üzerinde birçok baraj inşaatı başlatıldı.",
+        "category": "İnşaat, Ekosistem",
+        "source": "Genel Tarih Kaynakları"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.03, 37.66]
       },
       "properties": {
         "title": "Ilısu Barajı İnşaatı Resmi Olarak Başladı",
         "date": 1997,
         "details": "Baraj inşaatı, yerel halkın protestolarına ve zorunlu göçlere neden oldu; 199 yerleşim yerinden 55 bin kişi göç etti.",
         "category": "Ekosistem, Sosyal Etki",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Ilisu_dam_construction.jpg",
-        "video": "https://www.youtube.com/embed/abcxyz"
+        "source": "Hasankeyf'i Yaşatma Girişimi"
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.34, 37.71] // Biraz kaydırıldı
+        "coordinates": [41.032, 37.664]
       },
       "properties": {
-        "title": "Dicle Nehri’nin Yönü Değiştirildi",
-        "date": 2012,
-        "details": "Nehir yatağının yönü değiştirilerek baraj inşaatı için hazırlık yapıldı.",
-        "category": "Ekosistem, İnşaat",
-        "image": null,
-        "video": null
+        "title": "Yerel Tepkiler ve İlk Protestolar",
+        "date": 1999,
+        "details": "Yerel halk, arkeologlar ve çevreciler, baraj projesine karşı ilk büyük çaplı protestoları düzenledi.",
+        "category": "Yerel Tepkiler, Çevre",
+        "source": "European Rivers Network"
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.345, 37.715] // Biraz kaydırıldı
+        "coordinates": [41.038, 37.668]
       },
       "properties": {
-        "title": "Hasankeyf'te İlk Baraj Göleti Oluşturuldu",
-        "date": 2013,
-        "details": "Barajın ilk göletleri oluşturulmaya başlandı; bu durum, ekosisteme ve arkeolojik alanlara zarar verdi.",
-        "category": "Ekosistem, Arkeoloji",
-        "image": null,
-        "video": null
+        "title": "Ilısu Barajı İçin Uluslararası Finansman Sağlandı",
+        "date": 2001,
+        "details": "Proje, Avrupa'dan sağlanan kredilerle hız kazandı; ancak bu, daha fazla uluslararası protesto ve baskıya yol açtı.",
+        "category": "Politika, Ekonomi",
+        "source": "BBC News"
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.33, 37.713] // Biraz kaydırıldı
+        "coordinates": [41.045, 37.673]
       },
       "properties": {
-        "title": "Zeynel Bey Türbesi Taşındı",
-        "date": 2015,
-        "details": "Zeynel Bey Türbesi’nin taşınması, tarihi bütünlüğe zarar verdi. Diğer anıtlar da taşınacak olup, kültürel miras zarar görecek.",
-        "category": "Kültür, Tarih",
-        "image": null,
-        "video": "https://www.youtube.com/embed/defghi"
+        "title": "Diyarbakır ve Batman’da Protesto Gösterileri",
+        "date": 2002,
+        "details": "Binlerce kişi barajın inşaatını protesto etmek için Diyarbakır ve Batman'da sokaklara döküldü.",
+        "category": "Yerel Tepkiler, Sosyal Etki",
+        "source": "Hasankeyf'i Yaşatma Girişimi"
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.32, 37.712] // Biraz kaydırıldı
+        "coordinates": [41.048, 37.676]
       },
       "properties": {
-        "title": "Hasankeyf'in Tamamen Sular Altında Kalması",
-        "date": 2019,
-        "details": "12.000 yıllık tarihe sahip olan Hasankeyf, Ilısu Barajı'nın dolmasıyla tamamen sular altında kaldı.",
-        "category": "Tarih, Arkeoloji",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Hasankeyf_under_water.jpg",
-        "video": null
+        "title": "İlk Kez Askeri Müdahale Gerçekleşti",
+        "date": 2003,
+        "details": "Protestoları bastırmak için ilk kez asker müdahale etti, birçok kişi gözaltına alındı.",
+        "category": "Askeri Müdahale, Güvenlik",
+        "source": "Hasankeyf'i Yaşatma Girişimi"
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.35, 37.719] // Biraz kaydırıldı
+        "coordinates": [41.052, 37.68]
       },
       "properties": {
-        "title": "Hasankeyf ve Çevresindeki Kültürel Mirasın Geri Dönülmez Kaybı",
-        "date": 2024,
-        "details": "Uzmanlar, Hasankeyf ve çevresindeki kültürel mirasın geri dönülmez bir şekilde kaybedildiğini ve dünya kültürel mirasına büyük bir darbe vurulduğunu belirtti.",
-        "category": "Kültürel Miras, Tarih",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Hasankeyf_ruins.jpg",
-        "video": null
+        "title": "Ilısu Barajı’na Uluslararası Tepkiler",
+        "date": 2006,
+        "details": "Baraj finansmanı uluslararası çevreler tarafından eleştirildi, Avrupa bankaları finansmanı çekti.",
+        "category": "Politika, Ekonomi",
+        "source": "BBC News"
       }
-    }
-  ]
-}
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.055, 37.684]
+      },
+      "properties": {
+        "title": "Yerel Halkın Göçe Zorlanması",
+        "date": 2007,
+        "details": "199 yerleşim yerinden halkın göç ettirilmesi için resmi süreçler başlatıldı; bu süreç zorunlu hale getirildi.",
+        "category": "Sosyal Etki, Zorunlu Göç",
+        "source": "Reuters"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.058, 37.688]
+      },
+      "properties": {
+        "title": "Hasankeyf'te Arkeolojik Kazılar Hızlandı",
+        "date": 2008,
+        "details": "Sadece %10'u kazılan Hasankeyf'teki arkeolojik çalışmalar yetersiz kaldı.",
+        "category": "Arkeoloji, Kültür",
+        "source": "Archaeology News Network"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.062, 37.692]
+      },
+      "properties": {
+        "title": "Çevreci STK'lar Tarafından Kampanyalar Başlatıldı",
+        "date": 2009,
+        "details": "Çevreci sivil toplum kuruluşları, barajın durdurulması için ulusal ve uluslararası kampanyalar başlattı.",
+        "category": "Çevre, Politika",
+        "source": "European Rivers Network"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.065, 37.696]
+      },
+      "properties": {
+        "title": "Yeni Hasankeyf’in İnşası Başladı",
+        "date": 2010,
+        "details": "Baraj inşaatı nedeniyle yerleşim yerleri yeni Hasankeyf’e taşınmaya başlandı.",
+        "category": "Sosyal Etki, Ekonomi",
+        "source": "Reuters"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.068, 37.7]
+      },
+      "properties": {
+        "title": "Protestoların Artması",
+        "date": 2011,
+        "details": "Yeni Hasankeyf inşası sırasında protestolar arttı, yerel halk ve çevreciler tekrar sokaklara döküldü.",
+        "category": "Yerel Tepkiler, Sosyal Etki",
+        "source": "Hasankeyf'i Yaşatma Girişimi
