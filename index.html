@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Tigris</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #slider {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            width: 300px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            font-family: sans-serif;
+        }
+        #dateLabel {
+            margin-left: 10px;
+        }
+        .popup-content img, .popup-content iframe {
+            max-width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="slider">
+    <input id="timeSlider" type="range" min="3000" max="2024" step="1" value="3000">
+    <span id="dateLabel">MÖ 3000</span>
+</div>
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoieWVsdGFrb20iLCJhIjoidG93ZmpycyJ9.OmdsZ72J67CAQR9tFm8_Nw';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [41.3377, 37.7083], // Hasankeyf'in koordinatları
+        zoom: 8
+    });
+
+    fetch('hasankeyf_data.json')
+        .then(response => response.json())
+        .then(geojson => {
+            map.on('load', function () {
+                map.addSource('places', {
+                    'type': 'geojson',
+                    'data': geojson
+                });
+
+                map.addLayer({
+                    'id': 'places',
+                    'type': 'symbol',
+                    'source': 'places',
+                    'layout': {
+                        'icon-image': 'marker-15',
+                        'text-field': ['get', 'title'],
+                        'text-offset': [0, 0.6],
+                        'text-anchor': 'top'
+                    }
+                });
+
+                const slider = document.getElementById('timeSlider');
+                const dateLabel = document.getElementById('dateLabel');
+
+                slider.addEventListener('input', function (e) {
+                    const year = parseInt(e.target.value);
+                    dateLabel.innerHTML = year > 0 ? year : `MÖ ${Math.abs(year)}`;
+
+                    const filteredData = {
+                        "type": "FeatureCollection",
+                        "features": geojson.features.filter(function (feature) {
+                            return parseInt(feature.properties.date) <= year;
+                        })
+                    };
+
+                    map.getSource('places').setData(filteredData);
+                });
+
+                map.on('click', 'places', function (e) {
+                    const coordinates = e.features[0].geometry.coordinates.slice();
+                    const properties = e.features[0].properties;
+                    let popupContent = `<h3>${properties.title}</h3><p>${properties.details}</p>`;
+                    if (properties.image) {
+                        popupContent += `<img src="${properties.image}" alt="${properties.title}">`;
+                    }
+                    if (properties.video) {
+                        popupContent += `<iframe width="300" height="200" src="${properties.video}" frameborder="0" allowfullscreen></iframe>`;
+                    }
+
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(`<div class="popup-content">${popupContent}</div>`)
+                        .addTo(map);
+                });
+
+                slider.dispatchEvent(new Event('input'));
+            });
+        });
+</script>
+</body>
+</html>
