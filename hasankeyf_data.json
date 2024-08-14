@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [40.6469, 37.9188] 
+      },
+      "properties": {
+        "title": "Sümerler Tigris Nehri Boyunca Tarım Yaptı",
+        "date": -3000,
+        "details": "Sümerler, Dicle Nehri boyunca sulama sistemleri kurarak tarım faaliyetlerini geliştirdi.",
+        "category": "Tarih, Ekonomi",
+        "source": "Genel Tarih Kaynakları",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/84/Tigris_River_at_Hasankeyf_2016.jpg",
+        "video": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [41.3377, 37.7083]
+      },
+      "properties": {
+        "title": "İlk İnsan Yerleşimleri Hasankeyf’te Kuruldu",
+        "date": -12000,
+        "details": "24 farklı kültürün izlerini taşıyan, yerleşik hayata geçişin simgesi olan bir bölgedir.",
+        "category": "Tarih, Kültür",
+        "source": "European Rivers Network",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Hasankeyf.jpg",
+        "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      }
+    }
+    // Diğer verileri buraya ekleyin...
+  ]
+}
