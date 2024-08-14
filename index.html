@@ -4,29 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasankeyf Map Project</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet" />
 </head>
 <body>
     <div id="map"></div>
-    <div id="slider">
-        <input id="timeSlider" type="range" min="3000" max="2024" step="1" value="3000">
-        <span id="dateLabel">MÖ 3000</span>
+    <div id="legend">
+        <h3>Kategoriler</h3>
+        <ul>
+            <li><a href="#" data-category="Tarih">Tarih</a></li>
+            <li><a href="#" data-category="Ekonomi">Ekonomi</a></li>
+            <li><a href="#" data-category="Ekosistem">Ekosistem</a></li>
+            <li><a href="#" data-category="Sosyal Etki">Sosyal Etki</a></li>
+            <li><a href="#" data-category="Kültür">Kültür</a></li>
+            <li><a href="#" data-category="Arkeoloji">Arkeoloji</a></li>
+        </ul>
+        <button id="resetButton">Filtreyi Sıfırla</button>
     </div>
 
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoieWVsdGFrb20iLCJhIjoidG93ZmpycyJ9.OmdsZ72J67CAQR9tFm8_Nw';  // Mapbox access token burada olacak
         const map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/yeltakom/cjjjualot26wo2rqrstcoge65',
+            style: 'mapbox://styles/mapbox/streets-v11',
             center: [41.3377, 37.7083], // Hasankeyf'in koordinatları
             zoom: 8
         });
 
+        let originalData;
+
         fetch('hasankeyf_data.json')
             .then(response => response.json())
             .then(geojson => {
+                originalData = geojson;
                 map.on('load', function () {
                     map.addSource('places', {
                         'type': 'geojson',
@@ -45,23 +56,6 @@
                         }
                     });
 
-                    const slider = document.getElementById('timeSlider');
-                    const dateLabel = document.getElementById('dateLabel');
-
-                    slider.addEventListener('input', function (e) {
-                        const year = parseInt(e.target.value);
-                        dateLabel.innerHTML = year > 0 ? year : `MÖ ${Math.abs(year)}`;
-
-                        const filteredData = {
-                            "type": "FeatureCollection",
-                            "features": geojson.features.filter(function (feature) {
-                                return parseInt(feature.properties.date) <= year;
-                            })
-                        };
-
-                        map.getSource('places').setData(filteredData);
-                    });
-
                     map.on('click', 'places', function (e) {
                         const coordinates = e.features[0].geometry.coordinates.slice();
                         const properties = e.features[0].properties;
@@ -78,11 +72,27 @@
                             .setHTML(popupContent)
                             .addTo(map);
                     });
-
-                    slider.dispatchEvent(new Event('input'));
                 });
             })
             .catch(error => console.error('JSON dosyası yüklenemedi:', error));
+
+        document.querySelectorAll('#legend a').forEach(function (categoryLink) {
+            categoryLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                const category = this.getAttribute('data-category');
+                const filteredData = {
+                    "type": "FeatureCollection",
+                    "features": originalData.features.filter(function (feature) {
+                        return feature.properties.category.includes(category);
+                    })
+                };
+                map.getSource('places').setData(filteredData);
+            });
+        });
+
+        document.getElementById('resetButton').addEventListener('click', function () {
+            map.getSource('places').setData(originalData);
+        });
     </script>
 </body>
 </html>
