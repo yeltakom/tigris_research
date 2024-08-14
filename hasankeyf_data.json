@@ -1,8 +1,3 @@
-Aşağıda, belirttiğiniz 30 satırlık veri setini JSON formatına çevirdim ve bu verileri Mapbox ile kullanabileceğiniz bir formatta düzenledim. Bu JSON dosyasını doğrudan Mapbox haritanızda kullanabilirsiniz.
-
-### JSON Veri Seti (hasankeyf_data.json)
-
-```json
 {
   "type": "FeatureCollection",
   "features": [
@@ -212,5 +207,4 @@ Aşağıda, belirttiğiniz 30 satırlık veri setini JSON formatına çevirdim v
         "title": "Protestoların Artması",
         "date": 2011,
         "details": "Yeni Hasankeyf inşası sırasında protestolar arttı, yerel halk ve çevreciler tekrar sokaklara döküldü.",
-        "category": "Yerel Tepkiler, Sosyal Etki",
-        "source": "Hasankeyf'i Yaşatma Girişimi
+        "category": "Yer
