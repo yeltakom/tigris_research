@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasankeyf Map Project</title>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet" />
-    <link href="style.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
 </head>
 <body>
     <div id="map"></div>
-    <div id="legend">
-        <h3>Kategoriler</h3>
-        <ul>
-            <li><a href="#" data-category="Tarih">Tarih</a></li>
-            <li><a href="#" data-category="Ekonomi">Ekonomi</a></li>
-            <li><a href="#" data-category="Ekosistem">Ekosistem</a></li>
-            <li><a href="#" data-category="Sosyal Etki">Sosyal Etki</a></li>
-            <li><a href="#" data-category="Kültür">Kültür</a></li>
-            <li><a href="#" data-category="Arkeoloji">Arkeoloji</a></li>
-        </ul>
-        <button id="resetButton">Filtreyi Sıfırla</button>
-    </div>
 
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoieWVsdGFrb20iLCJhIjoidG93ZmpycyJ9.OmdsZ72J67CAQR9tFm8_Nw';  // Mapbox access token burada olacak
+        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';  // Mapbox access token burada olacak
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
@@ -32,12 +33,9 @@
             zoom: 8
         });
 
-        let originalData;
-
         fetch('hasankeyf_data.json')
             .then(response => response.json())
             .then(geojson => {
-                originalData = geojson;
                 map.on('load', function () {
                     map.addSource('places', {
                         'type': 'geojson',
@@ -75,24 +73,6 @@
                 });
             })
             .catch(error => console.error('JSON dosyası yüklenemedi:', error));
-
-        document.querySelectorAll('#legend a').forEach(function (categoryLink) {
-            categoryLink.addEventListener('click', function (e) {
-                e.preventDefault();
-                const category = this.getAttribute('data-category');
-                const filteredData = {
-                    "type": "FeatureCollection",
-                    "features": originalData.features.filter(function (feature) {
-                        return feature.properties.category.includes(category);
-                    })
-                };
-                map.getSource('places').setData(filteredData);
-            });
-        });
-
-        document.getElementById('resetButton').addEventListener('click', function () {
-            map.getSource('places').setData(originalData);
-        });
     </script>
 </body>
 </html>
