@@ -201,10 +201,4 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.068, 37.7]
-      },
-      "properties": {
-        "title": "Protestoların Artması",
-        "date": 2011,
-        "details": "Yeni Hasankeyf inşası sırasında protestolar arttı, yerel halk ve çevreciler tekrar sokaklara döküldü.",
-        "category": "Yer
+        "coordinates": [41.068,
