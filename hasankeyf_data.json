@@ -22,7 +22,7 @@
         "coordinates": [41.3377, 37.7083]
       },
       "properties": {
-        "title": "İlk İnsan Yerleşimleri Hasankeyf’te Kuruldu",
+        "title": "İlk İnsan Yerleşimleri Hasankeyf'te Kuruldu",
         "date": -12000,
         "details": "24 farklı kültürün izlerini taşıyan, yerleşik hayata geçişin simgesi olan bir bölgedir.",
         "category": "Tarih, Kültür",
@@ -106,7 +106,7 @@
         "coordinates": [41.045, 37.673]
       },
       "properties": {
-        "title": "Diyarbakır ve Batman’da Protesto Gösterileri",
+        "title": "Diyarbakır ve Batman'da Protesto Gösterileri",
         "date": 2002,
         "details": "Binlerce kişi barajın inşaatını protesto etmek için Diyarbakır ve Batman'da sokaklara döküldü.",
         "category": "Yerel Tepkiler, Sosyal Etki",
@@ -134,7 +134,7 @@
         "coordinates": [41.052, 37.68]
       },
       "properties": {
-        "title": "Ilısu Barajı’na Uluslararası Tepkiler",
+        "title": "Ilısu Barajı'na Uluslararası Tepkiler",
         "date": 2006,
         "details": "Baraj finansmanı uluslararası çevreler tarafından eleştirildi, Avrupa bankaları finansmanı çekti.",
         "category": "Politika, Ekonomi",
@@ -190,9 +190,9 @@
         "coordinates": [41.065, 37.696]
       },
       "properties": {
-        "title": "Yeni Hasankeyf’in İnşası Başladı",
+        "title": "Yeni Hasankeyf'in İnşası Başladı",
         "date": 2010,
-        "details": "Baraj inşaatı nedeniyle yerleşim yerleri yeni Hasankeyf’e taşınmaya başlandı.",
+        "details": "Baraj inşaatı nedeniyle yerleşim yerleri yeni Hasankeyf'e taşınmaya başlandı.",
         "category": "Sosyal Etki, Ekonomi",
         "source": "Reuters"
       }
@@ -201,4 +201,5 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.068,
+        "coordinates": [41.068, 37.696]
+      },

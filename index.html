@@ -1,86 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasankeyf Map Project</title>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet" />
+    <title>Etkileşimli Mapbox Haritası</title>
+    <!-- Mapbox GL JS CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <!-- Özel CSS -->
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
+        /* Harita konteyner boyutu */
         #map {
             position: absolute;
             top: 0;
             bottom: 0;
             width: 100%;
         }
+
+        /* Pop-up içerik stili */
+        .popup-content {
+            max-width: 200px;
+        }
+
+        .popup-image {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Responsive ayarlar */
+        @media (max-width: 600px) {
+            .popup-content {
+                max-width: 150px;
+            }
+        }
     </style>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
 </head>
 <body>
+
+    <!-- Harita Konteyneri -->
     <div id="map"></div>
 
+    <!-- Mapbox GL JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <!-- Özel JavaScript -->
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoieWVsdGFrb20iLCJhIjoidG93ZmpycyJ9.OmdsZ72J67CAQR9tFm8_Nw';  // Mapbox access token burada
+        // Mapbox erişim tokeninizi ayarlayın
+        mapboxgl.accessToken = 'pk.eyJ1IjoieWVsdGFrb20iLCJhIjoidG93ZmpycyJ9.OmdsZ72J67CAQR9tFm8_Nw';
 
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [41.3377, 37.7083], // Hasankeyf'in koordinatları
-            zoom: 8
+        // Haritayı başlat
+        var map = new mapboxgl.Map({
+            container: 'map', // Konteyner ID
+            style: 'mapbox://styles/mapbox/streets-v11', // Harita stili
+            center: [41.4110, 37.7151], // Başlangıç merkezi (Hasankeyf koordinatları)
+            zoom: 12 // Başlangıç zoom seviyesi
         });
 
-        fetch('hasankeyf_data.json')
-            .then(response => response.json())
-            .then(geojson => {
-                map.on('load', function () {
-                    map.addSource('places', {
-                        'type': 'geojson',
-                        'data': geojson
-                    });
+        // Marker verileri
+        var locations = [
+            // 20 adet nokta örneği
+            {
+                coordinates: [41.4110, 37.7151],
+                title: 'Nokta 1',
+                description: 'Nokta 1 açıklaması.',
+                image: 'https://via.placeholder.com/150'
+            },
+            {
+                coordinates: [41.4120, 37.7160],
+                title: 'Nokta 2',
+                description: 'Nokta 2 açıklaması.',
+                image: 'https://via.placeholder.com/150'
+            },
+            {
+                coordinates: [41.4100, 37.7140],
+                title: 'Nokta 3',
+                description: 'Nokta 3 açıklaması.',
+                image: 'https://via.placeholder.com/150'
+            },
+            // Diğer noktaları ekleyin...
+        ];
 
-                    // Circle layer to display points as circles with a 7px radius
-                    map.addLayer({
-                        'id': 'places',
-                        'type': 'circle',
-                        'source': 'places',
-                        'paint': {
-                            'circle-radius': 7,
-                            'circle-color': '#FF4136'
-                        }
-                    });
+        // Örnek olarak 20 nokta oluşturuyoruz
+        for (var i = 4; i <= 20; i++) {
+            locations.push({
+                coordinates: [
+                    41.4110 + (Math.random() - 0.5) * 0.02, // Longitude
+                    37.7151 + (Math.random() - 0.5) * 0.02  // Latitude
+                ],
+                title: 'Nokta ' + i,
+                description: 'Nokta ' + i + ' açıklaması.',
+                image: 'https://via.placeholder.com/150'
+            });
+        }
 
-                    // Add popup functionality
-                    map.on('click', 'places', function (e) {
-                        const coordinates = e.features[0].geometry.coordinates.slice();
-                        const properties = e.features[0].properties;
-                        let popupContent = `<h3>${properties.title}</h3><p>${properties.details}</p>`;
-                        if (properties.source) {
-                            popupContent += `<p><strong>Source:</strong> ${properties.source}</p>`;
-                        }
+        // Markerları haritaya ekleyin
+        locations.forEach(function(location) {
+            // Her bir marker için DOM elemanı oluştur
+            var el = document.createElement('div');
+            el.className = 'marker';
 
-                        new mapboxgl.Popup()
-                            .setLngLat(coordinates)
-                            .setHTML(popupContent)
-                            .addTo(map);
-                    });
+            // Marker oluştur ve haritaya ekle
+            var marker = new mapboxgl.Marker(el)
+                .setLngLat(location.coordinates)
+                .addTo(map);
 
-                    // Change the cursor to a pointer when the mouse is over the places layer
-                    map.on('mouseenter', 'places', function () {
-                        map.getCanvas().style.cursor = 'pointer';
-                    });
+            // Pop-up içeriği oluştur
+            var popupContent = document.createElement('div');
+            popupContent.className = 'popup-content';
 
-                    // Change it back to default when it leaves
-                    map.on('mouseleave', 'places', function () {
-                        map.getCanvas().style.cursor = '';
-                    });
+            var popupTitle = document.createElement('h3');
+            popupTitle.textContent = location.title;
+            popupContent.appendChild(popupTitle);
+
+            var popupDescription = document.createElement('p');
+            popupDescription.textContent = location.description;
+            popupContent.appendChild(popupDescription);
+
+            var popupImage = document.createElement('img');
+            popupImage.src = location.image;
+            popupImage.className = 'popup-image';
+            popupContent.appendChild(popupImage);
+
+            // Pop-up oluştur
+            var popup = new mapboxgl.Popup({ offset: 25 })
+                .setDOMContent(popupContent);
+
+            // Marker tıklama etkinliği
+            marker.getElement().addEventListener('click', function() {
+                // Konuma yakınlaştır
+                map.flyTo({
+                    center: location.coordinates,
+                    zoom: 14,
+                    essential: true
                 });
-            })
-            .catch(error => console.error('JSON dosyası yüklenemedi:', error));
+
+                // Pop-up'ı aç
+                popup.setLngLat(location.coordinates)
+                    .addTo(map);
+            });
+        });
+
+        // Pencere boyutu değiştiğinde haritayı yeniden boyutlandır
+        window.addEventListener('resize', function() {
+            map.resize();
+        });
     </script>
 </body>
 </html>
