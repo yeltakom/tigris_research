@@ -7,139 +7,257 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <!-- Özel CSS -->
     <style>
-        /* Harita konteyner boyutu */
+        /* Genel sayfa stili */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Harita konteyneri ve içerik alanı */
+        #container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* İçerik (lejant ve hikaye akışı) */
+        #content {
+            width: 30%;
+            background-color: #f8f9fa;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Harita alanı */
         #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
+            width: 70%;
         }
 
-        /* Pop-up içerik stili */
-        .popup-content {
-            max-width: 200px;
+        /* Lejant başlıkları */
+        .section {
+            margin-bottom: 40px;
+            cursor: pointer;
         }
 
-        .popup-image {
+        .section h2 {
+            margin-top: 0;
+        }
+
+        .section p {
+            margin: 10px 0;
+        }
+
+        .section img {
             width: 100%;
             height: auto;
         }
 
+        /* Seçili bölümün vurgulanması */
+        .active {
+            background-color: #e9ecef;
+        }
+
         /* Responsive ayarlar */
-        @media (max-width: 600px) {
-            .popup-content {
-                max-width: 150px;
+        @media (max-width: 768px) {
+            #container {
+                flex-direction: column;
+            }
+
+            #content, #map {
+                width: 100%;
+                height: 50%;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Harita Konteyneri -->
-    <div id="map"></div>
+    <div id="container">
+        <!-- İçerik (Lejant ve Hikaye Akışı) -->
+        <div id="content">
+            <!-- Bölümler -->
+            <div class="section" data-id="0">
+                <h2>Hasankeyf Kalesi</h2>
+                <p>Hasankeyf Kalesi, tarihi dokusuyla ziyaretçileri büyüleyen bir yapıdır.</p>
+                <img src="https://via.placeholder.com/300x200?text=Hasankeyf+Kalesi" alt="Hasankeyf Kalesi">
+            </div>
+            <div class="section" data-id="1">
+                <h2>Zeynel Bey Türbesi</h2>
+                <p>Zeynel Bey Türbesi, Akkoyunlu dönemine ait önemli bir eserdir.</p>
+                <img src="https://via.placeholder.com/300x200?text=Zeynel+Bey+Türbesi" alt="Zeynel Bey Türbesi">
+            </div>
+            <div class="section" data-id="2">
+                <h2>Hasankeyf Mağaraları</h2>
+                <p>Yüzyıllardır yerleşim yeri olarak kullanılan doğal mağaralar.</p>
+                <img src="https://via.placeholder.com/300x200?text=Mağaralar" alt="Hasankeyf Mağaraları">
+            </div>
+            <!-- Diğer bölümleri ekleyin... -->
+            <!-- Toplam 20 bölüm için örnek içerikler -->
+            <!-- Aşağıda 3 tanesi daha eklenmiştir -->
+            <div class="section" data-id="3">
+                <h2>Artuklu Köprüsü</h2>
+                <p>Tarihi köprünün kalıntıları ve önemi hakkında bilgiler.</p>
+                <img src="https://via.placeholder.com/300x200?text=Artuklu+Köprüsü" alt="Artuklu Köprüsü">
+            </div>
+            <div class="section" data-id="4">
+                <h2>Yeni Hasankeyf Yerleşimi</h2>
+                <p>Yeni yerleşim alanının modern mimarisi ve özellikleri.</p>
+                <img src="https://via.placeholder.com/300x200?text=Yeni+Hasankeyf" alt="Yeni Hasankeyf Yerleşimi">
+            </div>
+            <div class="section" data-id="5">
+                <h2>Tarihi Camiler</h2>
+                <p>Hasankeyf'teki önemli camilerin tarihi ve mimari özellikleri.</p>
+                <img src="https://via.placeholder.com/300x200?text=Tarihi+Camiler" alt="Tarihi Camiler">
+            </div>
+            <!-- Kalan bölümleri benzer şekilde ekleyebilirsiniz -->
+        </div>
+
+        <!-- Harita Konteyneri -->
+        <div id="map"></div>
+    </div>
 
     <!-- Mapbox GL JS -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <!-- Özel JavaScript -->
     <script>
         // Mapbox erişim tokeninizi ayarlayın
-        mapboxgl.accessToken = 'pk.eyJ1IjoieWVsdGFrb20iLCJhIjoidG93ZmpycyJ9.OmdsZ72J67CAQR9tFm8_Nw';
+        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN_HERE';
 
         // Haritayı başlat
         var map = new mapboxgl.Map({
             container: 'map', // Konteyner ID
-            style: 'mapbox://styles/mapbox/streets-v11', // Harita stili
+            style: 'mapbox://styles/mapbox/light-v10', // Harita stili
             center: [41.4110, 37.7151], // Başlangıç merkezi (Hasankeyf koordinatları)
-            zoom: 12 // Başlangıç zoom seviyesi
+            zoom: 13 // Başlangıç zoom seviyesi
         });
 
         // Marker verileri
         var locations = [
-            // 20 adet nokta örneği
             {
-                coordinates: [41.4110, 37.7151],
-                title: 'Nokta 1',
-                description: 'Nokta 1 açıklaması.',
-                image: 'https://via.placeholder.com/150'
+                coordinates: [41.4140, 37.7145],
+                title: 'Hasankeyf Kalesi',
+                description: 'Hasankeyf Kalesi, tarihi dokusuyla ziyaretçileri büyüleyen bir yapıdır.',
+                image: 'https://via.placeholder.com/150?text=Kale'
             },
             {
-                coordinates: [41.4120, 37.7160],
-                title: 'Nokta 2',
-                description: 'Nokta 2 açıklaması.',
-                image: 'https://via.placeholder.com/150'
+                coordinates: [41.4155, 37.7120],
+                title: 'Zeynel Bey Türbesi',
+                description: 'Zeynel Bey Türbesi, Akkoyunlu dönemine ait önemli bir eserdir.',
+                image: 'https://via.placeholder.com/150?text=Türbe'
             },
             {
-                coordinates: [41.4100, 37.7140],
-                title: 'Nokta 3',
-                description: 'Nokta 3 açıklaması.',
-                image: 'https://via.placeholder.com/150'
+                coordinates: [41.4125, 37.7165],
+                title: 'Hasankeyf Mağaraları',
+                description: 'Yüzyıllardır yerleşim yeri olarak kullanılan doğal mağaralar.',
+                image: 'https://via.placeholder.com/150?text=Mağaralar'
             },
-            // Diğer noktaları ekleyin...
+            {
+                coordinates: [41.4100, 37.7130],
+                title: 'Artuklu Köprüsü',
+                description: 'Tarihi köprünün kalıntıları ve önemi hakkında bilgiler.',
+                image: 'https://via.placeholder.com/150?text=Köprü'
+            },
+            {
+                coordinates: [41.4130, 37.7175],
+                title: 'Yeni Hasankeyf Yerleşimi',
+                description: 'Yeni yerleşim alanının modern mimarisi ve özellikleri.',
+                image: 'https://via.placeholder.com/150?text=Yeni+Yerleşim'
+            },
+            {
+                coordinates: [41.4115, 37.7155],
+                title: 'Tarihi Camiler',
+                description: 'Hasankeyf\'teki önemli camilerin tarihi ve mimari özellikleri.',
+                image: 'https://via.placeholder.com/150?text=Camiler'
+            },
+            // Toplam 20 adet nokta eklemek için benzer şekilde devam edin...
         ];
 
-        // Örnek olarak 20 nokta oluşturuyoruz
-        for (var i = 4; i <= 20; i++) {
+        // Örnek olarak toplam 20 nokta için rastgele noktalar ekliyoruz
+        for (var i = 6; i < 20; i++) {
             locations.push({
                 coordinates: [
                     41.4110 + (Math.random() - 0.5) * 0.02, // Longitude
                     37.7151 + (Math.random() - 0.5) * 0.02  // Latitude
                 ],
-                title: 'Nokta ' + i,
-                description: 'Nokta ' + i + ' açıklaması.',
-                image: 'https://via.placeholder.com/150'
+                title: 'Yer ' + (i + 1),
+                description: 'Burası Yer ' + (i + 1) + ' için açıklama metnidir.',
+                image: 'https://via.placeholder.com/150?text=Yer+' + (i + 1)
             });
+
+            // İçerik bölümüne de ekleyelim
+            var contentDiv = document.createElement('div');
+            contentDiv.className = 'section';
+            contentDiv.setAttribute('data-id', i);
+
+            var title = document.createElement('h2');
+            title.textContent = 'Yer ' + (i + 1);
+            contentDiv.appendChild(title);
+
+            var description = document.createElement('p');
+            description.textContent = 'Burası Yer ' + (i + 1) + ' için açıklama metnidir.';
+            contentDiv.appendChild(description);
+
+            var image = document.createElement('img');
+            image.src = 'https://via.placeholder.com/300x200?text=Yer+' + (i + 1);
+            image.alt = 'Yer ' + (i + 1);
+            contentDiv.appendChild(image);
+
+            document.getElementById('content').appendChild(contentDiv);
         }
 
         // Markerları haritaya ekleyin
-        locations.forEach(function(location) {
-            // Her bir marker için DOM elemanı oluştur
-            var el = document.createElement('div');
-            el.className = 'marker';
-
+        locations.forEach(function(location, index) {
             // Marker oluştur ve haritaya ekle
-            var marker = new mapboxgl.Marker(el)
+            var marker = new mapboxgl.Marker()
                 .setLngLat(location.coordinates)
                 .addTo(map);
 
-            // Pop-up içeriği oluştur
-            var popupContent = document.createElement('div');
-            popupContent.className = 'popup-content';
+            // Marker'ı diziye ekle (ileride kullanmak için)
+            location.marker = marker;
+        });
 
-            var popupTitle = document.createElement('h3');
-            popupTitle.textContent = location.title;
-            popupContent.appendChild(popupTitle);
+        // Bölümleri seçin
+        var sections = document.querySelectorAll('.section');
 
-            var popupDescription = document.createElement('p');
-            popupDescription.textContent = location.description;
-            popupContent.appendChild(popupDescription);
+        // Bölümlere tıklama etkinliği ekleyin
+        sections.forEach(function(section) {
+            section.addEventListener('click', function() {
+                // Aktif sınıfını kaldır
+                sections.forEach(function(s) {
+                    s.classList.remove('active');
+                });
+                // Seçilen bölüme aktif sınıfını ekle
+                this.classList.add('active');
 
-            var popupImage = document.createElement('img');
-            popupImage.src = location.image;
-            popupImage.className = 'popup-image';
-            popupContent.appendChild(popupImage);
+                // İlgili lokasyonu al
+                var index = this.getAttribute('data-id');
+                var location = locations[index];
 
-            // Pop-up oluştur
-            var popup = new mapboxgl.Popup({ offset: 25 })
-                .setDOMContent(popupContent);
-
-            // Marker tıklama etkinliği
-            marker.getElement().addEventListener('click', function() {
-                // Konuma yakınlaştır
+                // Haritayı ilgili konuma yakınlaştır
                 map.flyTo({
                     center: location.coordinates,
                     zoom: 14,
                     essential: true
                 });
 
-                // Pop-up'ı aç
-                popup.setLngLat(location.coordinates)
+                // Pop-up oluştur ve aç
+                var popup = new mapboxgl.Popup({ offset: 25 })
+                    .setLngLat(location.coordinates)
+                    .setHTML('<h3>' + location.title + '</h3><p>' + location.description + '</p>')
                     .addTo(map);
             });
         });
 
-        // Pencere boyutu değiştiğinde haritayı yeniden boyutlandır
-        window.addEventListener('resize', function() {
-            map.resize();
+        // Sayfa yüklenirken ilk bölümü seçili yap
+        sections[0].classList.add('active');
+        // Haritayı ilk konuma yakınlaştır
+        map.on('load', function() {
+            map.flyTo({
+                center: locations[0].coordinates,
+                zoom: 14,
+                essential: true
+            });
         });
     </script>
 </body>
