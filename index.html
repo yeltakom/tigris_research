@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Etkileşimli Mapbox Haritası</title>
+    <title>Hasankeyf Timeline Haritası</title>
     <!-- Mapbox GL JS CSS -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <!-- Özel CSS -->
@@ -20,8 +20,8 @@
             overflow: hidden;
         }
 
-        /* İçerik (lejant ve hikaye akışı) */
-        #content {
+        /* İçerik (Timeline ve Hikaye Akışı) */
+        #timeline {
             width: 30%;
             background-color: #f8f9fa;
             overflow-y: auto;
@@ -34,27 +34,28 @@
             width: 70%;
         }
 
-        /* Lejant başlıkları */
-        .section {
-            margin-bottom: 40px;
+        /* Timeline öğeleri */
+        .event {
+            margin-bottom: 20px;
             cursor: pointer;
+            padding: 10px;
+            border-left: 3px solid #007BFF;
         }
 
-        .section h2 {
-            margin-top: 0;
+        .event:hover {
+            background-color: #e9ecef;
         }
 
-        .section p {
-            margin: 10px 0;
+        .event h3 {
+            margin: 0;
         }
 
-        .section img {
-            width: 100%;
-            height: auto;
+        .event p {
+            margin: 5px 0;
         }
 
-        /* Seçili bölümün vurgulanması */
-        .active {
+        /* Seçili etkinliğin vurgulanması */
+        .active-event {
             background-color: #e9ecef;
         }
 
@@ -64,7 +65,7 @@
                 flex-direction: column;
             }
 
-            #content, #map {
+            #timeline, #map {
                 width: 100%;
                 height: 50%;
             }
@@ -74,43 +75,10 @@
 <body>
 
     <div id="container">
-        <!-- İçerik (Lejant ve Hikaye Akışı) -->
-        <div id="content">
-            <!-- Bölümler -->
-            <div class="section" data-id="0">
-                <h2>Hasankeyf Kalesi</h2>
-                <p>Hasankeyf Kalesi, tarihi dokusuyla ziyaretçileri büyüleyen bir yapıdır.</p>
-                <img src="https://via.placeholder.com/300x200?text=Hasankeyf+Kalesi" alt="Hasankeyf Kalesi">
-            </div>
-            <div class="section" data-id="1">
-                <h2>Zeynel Bey Türbesi</h2>
-                <p>Zeynel Bey Türbesi, Akkoyunlu dönemine ait önemli bir eserdir.</p>
-                <img src="https://via.placeholder.com/300x200?text=Zeynel+Bey+Türbesi" alt="Zeynel Bey Türbesi">
-            </div>
-            <div class="section" data-id="2">
-                <h2>Hasankeyf Mağaraları</h2>
-                <p>Yüzyıllardır yerleşim yeri olarak kullanılan doğal mağaralar.</p>
-                <img src="https://via.placeholder.com/300x200?text=Mağaralar" alt="Hasankeyf Mağaraları">
-            </div>
-            <!-- Diğer bölümleri ekleyin... -->
-            <!-- Toplam 20 bölüm için örnek içerikler -->
-            <!-- Aşağıda 3 tanesi daha eklenmiştir -->
-            <div class="section" data-id="3">
-                <h2>Artuklu Köprüsü</h2>
-                <p>Tarihi köprünün kalıntıları ve önemi hakkında bilgiler.</p>
-                <img src="https://via.placeholder.com/300x200?text=Artuklu+Köprüsü" alt="Artuklu Köprüsü">
-            </div>
-            <div class="section" data-id="4">
-                <h2>Yeni Hasankeyf Yerleşimi</h2>
-                <p>Yeni yerleşim alanının modern mimarisi ve özellikleri.</p>
-                <img src="https://via.placeholder.com/300x200?text=Yeni+Hasankeyf" alt="Yeni Hasankeyf Yerleşimi">
-            </div>
-            <div class="section" data-id="5">
-                <h2>Tarihi Camiler</h2>
-                <p>Hasankeyf'teki önemli camilerin tarihi ve mimari özellikleri.</p>
-                <img src="https://via.placeholder.com/300x200?text=Tarihi+Camiler" alt="Tarihi Camiler">
-            </div>
-            <!-- Kalan bölümleri benzer şekilde ekleyebilirsiniz -->
+        <!-- Timeline (Zaman Çizelgesi) -->
+        <div id="timeline">
+            <!-- Zaman Çizelgesi Olayları -->
+            <!-- Olaylar JavaScript ile dinamik olarak eklenecek -->
         </div>
 
         <!-- Harita Konteyneri -->
@@ -129,136 +97,123 @@
             container: 'map', // Konteyner ID
             style: 'mapbox://styles/mapbox/light-v10', // Harita stili
             center: [41.4110, 37.7151], // Başlangıç merkezi (Hasankeyf koordinatları)
-            zoom: 13 // Başlangıç zoom seviyesi
+            zoom: 12 // Başlangıç zoom seviyesi
         });
 
-        // Marker verileri
-        var locations = [
+        // Zaman çizelgesi verileri
+        var timelineData = [
             {
-                coordinates: [41.4140, 37.7145],
-                title: 'Hasankeyf Kalesi',
-                description: 'Hasankeyf Kalesi, tarihi dokusuyla ziyaretçileri büyüleyen bir yapıdır.',
-                image: 'https://via.placeholder.com/150?text=Kale'
+                date: 'MÖ 3000',
+                event: 'Sümerler Tigris Nehri Boyunca Tarım Yaptı',
+                location: 'Tigris Nehri',
+                details: 'Sümerler, Dicle Nehri boyunca sulama sistemleri kurarak tarım faaliyetlerini geliştirdi.',
+                category: 'Tarih, Ekonomi',
+                source: 'Genel Tarih Kaynakları',
+                coordinates: [41.0556, 35.0556] // Örnek koordinatlar
             },
             {
-                coordinates: [41.4155, 37.7120],
-                title: 'Zeynel Bey Türbesi',
-                description: 'Zeynel Bey Türbesi, Akkoyunlu dönemine ait önemli bir eserdir.',
-                image: 'https://via.placeholder.com/150?text=Türbe'
+                date: '12,000 Yıl Öncesi',
+                event: 'İlk İnsan Yerleşimleri Hasankeyf’te Kuruldu',
+                location: 'Hasankeyf',
+                details: '24 farklı kültürün izlerini taşıyan, yerleşik hayata geçişin simgesi olan bir bölgedir.',
+                category: 'Tarih, Kültür',
+                source: 'European Rivers Network',
+                coordinates: [41.4140, 37.7145]
             },
-            {
-                coordinates: [41.4125, 37.7165],
-                title: 'Hasankeyf Mağaraları',
-                description: 'Yüzyıllardır yerleşim yeri olarak kullanılan doğal mağaralar.',
-                image: 'https://via.placeholder.com/150?text=Mağaralar'
-            },
-            {
-                coordinates: [41.4100, 37.7130],
-                title: 'Artuklu Köprüsü',
-                description: 'Tarihi köprünün kalıntıları ve önemi hakkında bilgiler.',
-                image: 'https://via.placeholder.com/150?text=Köprü'
-            },
-            {
-                coordinates: [41.4130, 37.7175],
-                title: 'Yeni Hasankeyf Yerleşimi',
-                description: 'Yeni yerleşim alanının modern mimarisi ve özellikleri.',
-                image: 'https://via.placeholder.com/150?text=Yeni+Yerleşim'
-            },
-            {
-                coordinates: [41.4115, 37.7155],
-                title: 'Tarihi Camiler',
-                description: 'Hasankeyf\'teki önemli camilerin tarihi ve mimari özellikleri.',
-                image: 'https://via.placeholder.com/150?text=Camiler'
-            },
-            // Toplam 20 adet nokta eklemek için benzer şekilde devam edin...
+            // Diğer olayları ekleyin...
         ];
 
-        // Örnek olarak toplam 20 nokta için rastgele noktalar ekliyoruz
-        for (var i = 6; i < 20; i++) {
-            locations.push({
-                coordinates: [
-                    41.4110 + (Math.random() - 0.5) * 0.02, // Longitude
-                    37.7151 + (Math.random() - 0.5) * 0.02  // Latitude
-                ],
-                title: 'Yer ' + (i + 1),
-                description: 'Burası Yer ' + (i + 1) + ' için açıklama metnidir.',
-                image: 'https://via.placeholder.com/150?text=Yer+' + (i + 1)
-            });
+        // Olayları timeline'a ekleyin
+        var timelineContainer = document.getElementById('timeline');
 
-            // İçerik bölümüne de ekleyelim
-            var contentDiv = document.createElement('div');
-            contentDiv.className = 'section';
-            contentDiv.setAttribute('data-id', i);
+        timelineData.forEach(function(event, index) {
+            // Timeline öğesi oluştur
+            var eventDiv = document.createElement('div');
+            eventDiv.className = 'event';
+            eventDiv.setAttribute('data-id', index);
 
-            var title = document.createElement('h2');
-            title.textContent = 'Yer ' + (i + 1);
-            contentDiv.appendChild(title);
+            var eventDate = document.createElement('h3');
+            eventDate.textContent = event.date + ' - ' + event.event;
+            eventDiv.appendChild(eventDate);
 
-            var description = document.createElement('p');
-            description.textContent = 'Burası Yer ' + (i + 1) + ' için açıklama metnidir.';
-            contentDiv.appendChild(description);
+            var eventDetails = document.createElement('p');
+            eventDetails.textContent = event.details;
+            eventDiv.appendChild(eventDetails);
 
-            var image = document.createElement('img');
-            image.src = 'https://via.placeholder.com/300x200?text=Yer+' + (i + 1);
-            image.alt = 'Yer ' + (i + 1);
-            contentDiv.appendChild(image);
+            timelineContainer.appendChild(eventDiv);
 
-            document.getElementById('content').appendChild(contentDiv);
-        }
-
-        // Markerları haritaya ekleyin
-        locations.forEach(function(location, index) {
             // Marker oluştur ve haritaya ekle
             var marker = new mapboxgl.Marker()
-                .setLngLat(location.coordinates)
+                .setLngLat(event.coordinates)
                 .addTo(map);
 
-            // Marker'ı diziye ekle (ileride kullanmak için)
-            location.marker = marker;
+            // Marker ve olay referansını sakla
+            event.marker = marker;
+            event.element = eventDiv;
         });
 
-        // Bölümleri seçin
-        var sections = document.querySelectorAll('.section');
+        // Timeline öğelerine tıklama etkinliği ekleyin
+        var eventElements = document.querySelectorAll('.event');
 
-        // Bölümlere tıklama etkinliği ekleyin
-        sections.forEach(function(section) {
-            section.addEventListener('click', function() {
+        eventElements.forEach(function(element) {
+            element.addEventListener('click', function() {
                 // Aktif sınıfını kaldır
-                sections.forEach(function(s) {
-                    s.classList.remove('active');
+                eventElements.forEach(function(el) {
+                    el.classList.remove('active-event');
                 });
-                // Seçilen bölüme aktif sınıfını ekle
-                this.classList.add('active');
+                // Seçilen öğeye aktif sınıfını ekle
+                this.classList.add('active-event');
 
-                // İlgili lokasyonu al
+                // İlgili olayı al
                 var index = this.getAttribute('data-id');
-                var location = locations[index];
+                var selectedEvent = timelineData[index];
 
                 // Haritayı ilgili konuma yakınlaştır
                 map.flyTo({
-                    center: location.coordinates,
+                    center: selectedEvent.coordinates,
                     zoom: 14,
                     essential: true
                 });
 
                 // Pop-up oluştur ve aç
                 var popup = new mapboxgl.Popup({ offset: 25 })
-                    .setLngLat(location.coordinates)
-                    .setHTML('<h3>' + location.title + '</h3><p>' + location.description + '</p>')
+                    .setLngLat(selectedEvent.coordinates)
+                    .setHTML('<h3>' + selectedEvent.event + '</h3><p>' + selectedEvent.details + '</p>')
                     .addTo(map);
             });
         });
 
-        // Sayfa yüklenirken ilk bölümü seçili yap
-        sections[0].classList.add('active');
-        // Haritayı ilk konuma yakınlaştır
+        // Sayfa yüklenirken ilk olayı seçili yap
+        eventElements[0].classList.add('active-event');
+        // Haritayı ilk olaya yakınlaştır
         map.on('load', function() {
+            var firstEvent = timelineData[0];
             map.flyTo({
-                center: locations[0].coordinates,
+                center: firstEvent.coordinates,
                 zoom: 14,
                 essential: true
             });
         });
+
+        // Baraj çizimini haritaya ekleme
+        map.on('load', function () {
+            map.addSource('baraj', {
+                'type': 'geojson',
+                'data': 'baraj_sinir.geojson' // Baraj çiziminizin GeoJSON dosyasının yolu (aynı klasörde)
+            });
+
+            map.addLayer({
+                'id': 'baraj-layer',
+                'type': 'fill',
+                'source': 'baraj',
+                'layout': {},
+                'paint': {
+                    'fill-color': '#888888',
+                    'fill-opacity': 0.5
+                }
+            });
+        });
+
     </script>
 </body>
 </html>
