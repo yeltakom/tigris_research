@@ -122,7 +122,7 @@
     <!-- Özel JavaScript -->
     <script>
         // Mapbox erişim tokeninizi ayarlayın
-        mapboxgl.accessToken = 'pk.eyJ1IjoieWVsdGFrb20iLCJhIjoidG93ZmpycyJ9.OmdsZ72J67CAQR9tFm8_Nw';
+        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Buraya kendi Mapbox erişim tokeninizi ekleyin
 
         // Haritayı başlat
         var map = new mapboxgl.Map({
@@ -132,7 +132,7 @@
             zoom: 12 // Başlangıç zoom seviyesi
         });
 
-        // Zaman çizelgesi verileri (örnek verilerle güncellendi)
+        // Zaman çizelgesi verileri
         var timelineData = [
             {date: 'MÖ 3000', event: 'Sümerler Tigris Nehri Boyunca Tarım Yaptı', location: 'Tigris Nehri', details: 'Sümerler, Dicle Nehri boyunca sulama sistemleri kurarak tarım faaliyetlerini geliştirdi.', category: 'Tarih, Ekonomi', coordinates: [41.0556, 35.0556]},
             {date: '12,000 Yıl Öncesi', event: 'İlk İnsan Yerleşimleri Hasankeyf’te Kuruldu', location: 'Hasankeyf', details: '24 farklı kültürün izlerini taşıyan, yerleşik hayata geçişin simgesi olan bir bölgedir.', category: 'Tarih, Kültür', coordinates: [41.4140, 37.7145]},
@@ -141,10 +141,18 @@
             {date: '2020', event: 'Hasankeyf’in Tamamen Sular Altında Kalması', location: 'Hasankeyf', details: '12.000 yıllık tarihe sahip olan Hasankeyf, Ilısu Barajı\'nın dolmasıyla tamamen sular altında kaldı.', category: 'Tarih, Arkeoloji', coordinates: [41.411, 37.715]}
         ];
 
-        // Olayları timeline'a ekleyin
+        // Olayları timeline'a ekleyin ve haritaya marker ekleyin
         function renderTimeline(events) {
             var eventList = document.getElementById('event-list');
             eventList.innerHTML = ''; // Önceki olayları temizle
+
+            // Tüm markerları temizle
+            if (window.markers) {
+                window.markers.forEach(function(marker) {
+                    marker.remove();
+                });
+            }
+            window.markers = [];
 
             events.forEach(function(event, index) {
                 // Timeline öğesi oluştur
@@ -162,14 +170,51 @@
 
                 eventList.appendChild(eventDiv);
 
+                // Popup oluştur
+                var popup = new mapboxgl.Popup({ offset: 25 })
+                    .setText(event.details);
+
                 // Marker oluştur ve haritaya ekle
                 var marker = new mapboxgl.Marker()
                     .setLngLat(event.coordinates)
+                    .setPopup(popup)
                     .addTo(map);
 
                 // Marker ve olay referansını sakla
                 event.marker = marker;
                 event.element = eventDiv;
+                event.popup = popup;
+
+                // Markerları sakla (sonradan temizlemek için)
+                window.markers.push(marker);
+
+                // Timeline öğesine tıklama olayı ekle
+                eventDiv.addEventListener('click', function() {
+                    // Haritayı ilgili konuma yakınlaştır
+                    map.flyTo({
+                        center: event.coordinates,
+                        zoom: 14,
+                        essential: true
+                    });
+
+                    // Popup'ı göster
+                    popup.addTo(map);
+
+                    // Seçili etkinliği vurgula
+                    document.querySelectorAll('.event').forEach(function(el) {
+                        el.classList.remove('active-event');
+                    });
+                    eventDiv.classList.add('active-event');
+                });
+
+                // Marker tıklama olayı
+                marker.getElement().addEventListener('click', function() {
+                    // Seçili etkinliği vurgula
+                    document.querySelectorAll('.event').forEach(function(el) {
+                        el.classList.remove('active-event');
+                    });
+                    eventDiv.classList.add('active-event');
+                });
             });
         }
 
@@ -190,15 +235,38 @@
 
         // Sayfa yüklenirken ilk olayı seçili yap
         map.on('load', function() {
+            // Haritayı ilk olayın konumuna yakınlaştır
             map.flyTo({
                 center: timelineData[0].coordinates,
                 zoom: 14,
                 essential: true
             });
-        });
 
-        // Baraj çizimini haritaya ekleme
-        map.on('load', function () {
+            // İlk etkinliğin popup'ını göster
+            timelineData[0].popup.addTo(map);
+
+            // İlk etkinliği vurgula
+            timelineData[0].element.classList.add('active-event');
+
+            // Eğer baraj çizimini eklemek istiyorsanız ve GeoJSON veriniz varsa, aşağıdaki kodu kullanabilirsiniz
+            /*
             map.addSource('baraj', {
                 'type': 'geojson',
-                'data &#8203;:contentReference[oaicite:0]{index=0}&#8203;
+                'data': 'path/to/your/baraj.geojson' // Buraya barajınızın GeoJSON dosyasının yolunu ekleyin
+            });
+
+            map.addLayer({
+                'id': 'baraj-layer',
+                'type': 'fill',
+                'source': 'baraj',
+                'layout': {},
+                'paint': {
+                    'fill-color': '#888888',
+                    'fill-opacity': 0.5
+                }
+            });
+            */
+        });
+    </script>
+</body>
+</html>
